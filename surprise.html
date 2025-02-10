@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jaaan 🎉</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: black;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 3em;
+            color: #ffcc00;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            margin-top: 20px;
+        }
+
+        .fireworks {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 Happy Birthday, MY Queen!  🎂</h1>
+    <p>-Happy Birthday Tomato.!! </p>
+    <p>  -My sweetheart..!!</p>
+    <p>-প্রতিটা সময়..!! </p>
+    <p>- প্রতিটা মুহূর্তে..!! </p> 
+    <p>আমি তোমাকে চাই🖤..!!</p>
+    <p> Best Wish....!!</p>
+    <p>-Just ForYou..!!</p>
+    <p> I love You Tishu..😌☺️💋!</p>
+
+    <!-- 🎥 Birthday Video -->
+    <div class="video-container">
+        <!-- YouTube ভিডিও এম্বেড করুন -->
+        <iframe width="80%" height="400" src="https://www.youtube.com/embed/PGJjnAWyMHI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- 🎆 Fireworks Effect -->
+    <canvas class="fireworks"></canvas>
+
+    <script>
+        // 🎇 Fireworks Animation
+        const canvas = document.querySelector(".fireworks");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function randomColor() {
+            const colors = ["#ff0000", "#ff7300", "#ffcc00", "#00ff00", "#00ccff", "#cc00ff"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function createFirework(x, y) {
+            for (let i = 0; i < 50; i++) {
+                let angle = Math.random() * 2 * Math.PI;
+                let speed = Math.random() * 5 + 2;
+                let dx = Math.cos(angle) * speed;
+                let dy = Math.sin(angle) * speed;
+
+                fireworks.push({ x, y, dx, dy, color: randomColor(), alpha: 1 });
+            }
+        }
+
+        let fireworks = [];
+
+        function animateFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            fireworks.forEach((firework, index) => {
+                firework.x += firework.dx;
+                firework.y += firework.dy;
+                firework.alpha -= 0.02;
+
+                ctx.fillStyle = firework.color;
+                ctx.globalAlpha = firework.alpha;
+                ctx.beginPath();
+                ctx.arc(firework.x, firework.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (firework.alpha <= 0) {
+                    fireworks.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(animateFireworks);
+        }
+
+        canvas.addEventListener("click", (event) => {
+            createFirework(event.clientX, event.clientY);
+        });
+
+        animateFireworks();
+    </script>
+
+</body>
+</html>
